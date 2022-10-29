@@ -1,4 +1,4 @@
-import IMask from './node_modules/imask'
+import IMask from 'imask'
 
 var campoDeBusca = document.querySelector('#number')
 var sequenceMask = IMask(campoDeBusca, {
@@ -17,7 +17,7 @@ let contador = 3;
 function enviar() {
   let respostaNaTela = document.querySelector("#resposta");
   let enviar = document.querySelector("button");
-
+  
   if (number == sequenceMask) {
     respostaNaTela.innerHTML = "Parabéns, você acabou de acertar o número!";
     document.getElementById("tentativas").innerHTML =

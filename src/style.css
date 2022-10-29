@@ -1,0 +1,22 @@
+* {
+    margin:  0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body  {
+    background-image: url(./cc-bg-image.svg);
+    font-family: 'Roboto';
+    color: white;
+    font-weight: 500;
+}
+
+body {
+    text-align: center;
+    padding-top: 150px;
+}
+
+body, p {
+    padding-bottom: 20px;
+}
+
