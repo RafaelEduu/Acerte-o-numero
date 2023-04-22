@@ -35,33 +35,8 @@ body {
   font-size: 70px;
   font-family: "Roboto";
   font-weight: 900;
-  -webkit-text-stroke: rgb(15, 0, 32);
-  -webkit-text-stroke-width: 0.6px;
+  color: #e0e1dd;
 }
-
-#title {
-  /* Primeiro passo: definir um degradê como fundo */
-  background-image: linear-gradient(to bottom, #1865FB, #b5179e);
-  
-  /* Segundo passo: apagar do fundo tudo que não estiver imediatamente atrás de texto */
-  background-clip: text;
-  -webkit-background-clip: text; /* Alguns navegadores precisam do prefixo */
-
-  /* Terceiro passo: apagar o texto, deixando apenas o fundo atrás dele */
-  -webkit-text-fill-color: transparent;
-
-  /* Cor que contraste com o degradê, caso o navegador não suporte `background-clip: text` */
-
-  animation: titles 2s ease infinite;
-  transition: background-image 2s ease-in-out;
-}
-
-@keyframes titles {
-  0% {
-    background-image: linear-gradient(to bottom, #1865FB, #b5179e);
-  }
-}
-
 
 .interação {
   height: 80px;
