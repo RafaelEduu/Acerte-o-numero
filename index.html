@@ -8,21 +8,28 @@
     <link rel="stylesheet" href="./src/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"> 
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <title>Adivinhe</title>
 </head>
 
 <body>
-
-    <p>Acerte o número</p>
-    <p id="chutar"></p>
-    <input id="number" type="text" />
-    <button id="enviar">Enviar</button>
-    <p id="resposta"></p>
-    <p id="tentativas"></p>
-    <div id="button"></div>
+    <div class="div-mae">
+        <p id="title">Acerte o número</p>
+        <p id="chutar"></p>
+        <div class="interação">
+            <input id="number" type="text" placeholder="Digite um número de 0 a 10" />
+            <button id="enviar" disabled>Enviar</button>
+        </div>
+        <p id="resposta"></p>
+        <p id="testeAcerto"></p>
+        <p id="tentativas"></p>
+        <p id="resultadoFinal"></p>
+        <div id="button"></div>
+    </div>
 
     <script type="module" src="./src/index.js"></script>
+</body>
 
 </html>

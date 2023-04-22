@@ -1,66 +1,82 @@
 import IMask from "imask";
+import { NewGame } from "./lib/novoJogo";
+import { numeroSorteado, novoNumero } from "./lib/sorteioDoNumero";
+import { chances } from "./lib/contador";
 
-let number = parseInt(Math.random() * 11);
-console.log(number);
+let input = document.querySelector("#number");
+let respostaNaTela = document.querySelector("#resultadoFinal");
+let respostaTentativas = document.querySelector("#tentativas");
+let reiniciar = document.querySelector("#button");
+let buttonEnviar = document.querySelector("#enviar");
+let testeAcerto = document.querySelector("#testeAcerto");
 
-let contador = 3;
-let respostaNaTela = document.querySelector("#resposta");
+document.getElementById("enviar").disabled = true;
 
-enviar.addEventListener("click", () => {
-  var campoDeBusca = document.querySelector("#number");
-  var campoDeBuscaV = campoDeBusca.value;
-  var sequenceMask = IMask(campoDeBusca, {
+const mask = IMask(input, {
+  mask: Number,
+  min: 0,
+  max: 10,
+});
+
+input.addEventListener("input", function () {
+  if (this.value.length == '') {
+    buttonEnviar.disabled = true;
+  } else {
+    buttonEnviar.disabled = false;
+  }
+});
+
+input.addEventListener("click", () => {
+  input.value = '';
+
+  mask.updateValue(input, {
     mask: Number,
     min: 0,
     max: 10,
   });
-  document.getElementById('chutar').innerHTML = null
+});
 
-  console.log(campoDeBuscaV);
+let respostaDoUsuario;
 
-  if (number == campoDeBuscaV) {
+enviar.addEventListener("click", () => {
+  respostaDoUsuario = input.value;
 
-    respostaNaTela.innerHTML = "Parabéns, você acabou de acertar o número!";
+  if (chances == 0 && numeroSorteado != respostaDoUsuario) {
+    document.getElementById("enviar").disabled = true;
+    input.disabled = true;
+    testeAcerto.innerHTML = `O número sorteado era ${numeroSorteado}`
+    respostaTentativas.innerHTML = "Suas tentativas acabaram";
+    document.getElementById("button").innerHTML = "<button id='newgame'>Novo jogo</button>";
+  } 
+
+
+  if (numeroSorteado == respostaDoUsuario) {
+    testeAcerto.innerHTML = "Parabéns, você acabou de acertar o número!";
     document.getElementById("tentativas").innerHTML =
       'Para jogar novamente clique em "Novo Jogo"';
     document.getElementById("enviar").disabled = true;
-    document.getElementById(
-      "button"
-    ).innerHTML = `<button type=submit id="reiniciar" onclick="reiniciar()">Novo Jogo</button>`;
+    document.getElementById("button").innerHTML = "<button id='newgame'>New Game</button>";
   } 
   
-  if (campoDeBuscaV > number) {
-    respostaNaTela.innerHTML = `Errado! O número é menor que ${campoDeBuscaV}`;
-    contador = contador - 1;
-    document.getElementById(
-      "tentativas"
-    ).innerHTML = `Você tem mais ${contador} tentativas.`;
+  if (respostaDoUsuario > numeroSorteado) {
+    respostaNaTela.innerHTML = `Errado! O número é  menor que ${respostaDoUsuario}`;
   }
-  
-  if (campoDeBuscaV < number) {
-    respostaNaTela.innerHTML = `Errado! O número é maior que ${campoDeBuscaV}`;
-    contador = contador - 1;
-  } 
+  if (respostaDoUsuario < numeroSorteado) {
+    respostaNaTela.innerHTML = `Errado! O número é maior que ${respostaDoUsuario}`;
+  }
 
-  if (contador < 1) {
-    respostaNaTela.innerHTML = `Infelizmente, você não conseguiu acertar, mas o número era o ${number}`;
-    document.getElementById("tentativas").innerHTML =
-      "Suas chances acabaram, mas agora você pode jogar novamente, ja estou pensando em outro número aqui.";
-    document.getElementById(
-      "button"
-    ).innerHTML = `<button type=submit id="reiniciar">Novo Jogo</button>`;
-    document.getElementById("enviar").disabled = true;
+  if (numeroSorteado == respostaDoUsuario) {
+    respostaNaTela.innerHTML = "";
+  }
+  if (chances == 0 && numeroSorteado != respostaDoUsuario) {
+    respostaNaTela.innerHTML = '';
   }
 });
 
-let reiniciar = document.querySelector("#button");
 reiniciar.addEventListener("click", () => {
-  document.getElementById("enviar").disabled = false;
-  number = parseInt(Math.random() * 11);
-  console.log(number);
-  contador = 3;
+  respostaNaTela.innerHTML = ''
+  testeAcerto.innerHTML = ''
   document.getElementById("button").innerHTML = "";
-  document.getElementById("tentativas").innerHTML = "";
-  document.getElementById('chutar').innerHTML = 'Chute um novo número'
-  document.getElementById("resposta").innerHTML = "Você tem 3 tentativas";
+  novoNumero()
+  input.disabled = false;
 });
